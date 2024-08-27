@@ -47,6 +47,7 @@ form input[type="text"]:focus {
 .textarea {
     @apply bg-emDark-dark font-brand font-regular text-white text-xs border border-white h-[300px] resize-none;
     border-top: none;
+    border-left: none;
 }
 
 .textarea:focus {
@@ -59,6 +60,16 @@ form input[type="text"]:focus {
 
 .create_button {
     @apply bg-emPurple border border-white font-brand font-regular text-black text-base
+}
+
+.line-numbers {
+    @apply border border-white font-brand font-regular text-xs text-emDark-light bg-emDark-dark h-[300px] w-[54px] text-right overflow-hidden resize-none;
+    border-right: none;
+    border-top: none;
+}
+
+.line-numbers:focus {
+    @apply focus:outline-none focus:border-white focus:ring-0
 }
 
 .create_button:hover {
