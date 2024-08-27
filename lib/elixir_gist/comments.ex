@@ -9,15 +9,15 @@ defmodule ElixirGist.Comments do
   alias ElixirGist.Comments.Comment
 
   @doc """
-  Returns the list of commets.
+  Returns the list of comments.
 
   ## Examples
 
-      iex> list_commets()
+      iex> list_comments()
       [%Comment{}, ...]
 
   """
-  def list_commets do
+  def list_comments do
     Repo.all(Comment)
   end
 

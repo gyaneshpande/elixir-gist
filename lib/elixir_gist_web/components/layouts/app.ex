@@ -8,4 +8,5 @@ defmodule ElixirGistWeb.Layouts.App do
       out: {"transition ease-in duration-75", "transform opacity-100 translate-y-0", "transform opacity-0 translate-y-[-10%]"}
       )
   end
+
 end

@@ -4,12 +4,12 @@ defmodule ElixirGist.Comments.Comment do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "commets" do
+  schema "comments" do
     field :markup_text, :string
     belongs_to :user, ElixirGist.Accounts.User
     belongs_to :gist, ElixirGist.Gists.Gist
 
-    timestamps(type: :utc_datetime)
+    timestamps()
   end
 
   @doc false

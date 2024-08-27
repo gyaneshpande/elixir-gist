@@ -8,16 +8,18 @@ defmodule ElixirGist.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      # Start the Telemetry supervisor
       ElixirGistWeb.Telemetry,
+      # Start the Ecto repository
       ElixirGist.Repo,
-      {DNSCluster, query: Application.get_env(:elixir_gist, :dns_cluster_query) || :ignore},
+      # Start the PubSub system
       {Phoenix.PubSub, name: ElixirGist.PubSub},
-      # Start the Finch HTTP client for sending emails
+      # Start Finch
       {Finch, name: ElixirGist.Finch},
-      # Start a worker by calling: ElixirGist.Worker.start_link(arg)
-      # {ElixirGist.Worker, arg},
-      # Start to serve requests, typically the last entry
+      # Start the Endpoint (http/https)
       ElixirGistWeb.Endpoint
+      # Start a worker by calling: ElixirGist.Worker.start_link(arg)
+      # {ElixirGist.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
