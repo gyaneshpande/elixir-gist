@@ -14,7 +14,7 @@
 //
 //     import "some-package"
 //
-
+import hljs from "highlight.js"
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html"
 // Establish Phoenix Socket and LiveView configuration.
@@ -25,10 +25,37 @@ import topbar from "../vendor/topbar"
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
 let Hooks = {};
+
+Hooks.Highlight = {
+    mounted() {
+        
+    }
+}
+
 Hooks.UpdateLineNumbers = {
     mounted(){
+        const lineNumberText = document.querySelector("#line-numbers")
         this.el.addEventListener("input", ()=> {
             this.updateLineNumbers()
+        })
+
+        this.el.addEventListener("scroll", () => {
+            lineNumberText.scrollTop = this.el.scrollTop
+        })
+
+        this.handleEvent("clear-textareas", () => {
+            this.el.value = ""
+            lineNumberText.value = "1\n"
+        })
+
+        this.el.addEventListener("keydown", (e) => {
+            if (e.key == "Tab") {
+                e.preventDefault();
+                var start = this.el.selectionStart;
+                var end = this.el.selectionEnd;
+                this.el.value = this.el.value.substring(0, start) + "\t" + this.el.value.substring(end)
+                this.el.selectionStart = this.el.selectionEnd = start + 1
+            }
         })
 
         this.updateLineNumbers()
