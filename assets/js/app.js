@@ -26,7 +26,7 @@ let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("
 
 let Hooks = {};
 
-function updateLineNumbers(value) {
+function updateLineNumbers(value, element_id="#line-numbers") {
     const lineNumberText = document.querySelector("#line-numbers")
     if (!lineNumberText) return;
 
@@ -45,7 +45,7 @@ Hooks.Highlight = {
             codeBlock.classList.add(`language-${this.getSyntaxType(name)}`);
             trimmed = this.trimCodeBlock(codeBlock);
             hljs.highlightElement(trimmed);
-            updateLineNumbers(trimmed.textContent);
+            updateLineNumbers(trimmed.textContent, "#syntax-numbers");
         }
     },
 
@@ -121,7 +121,7 @@ Hooks.CopyToClipboard = {
             }
         })
     }
-}
+};
 
 Hooks.ToggleEdit = {
     mounted() {
@@ -132,7 +132,8 @@ Hooks.ToggleEdit = {
                 edit.style.display = "block";
                 syntax.style.display = "none";
             }
-    }
+    })
+}
 }
 
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})
